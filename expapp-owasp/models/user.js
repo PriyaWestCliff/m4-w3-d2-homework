@@ -7,6 +7,6 @@ const UserSchema = new mongoose.Schema({
   phone: Number
 });
 
-UserSchema.plugin(passportLocalMongoose); // auto salt + hash
+UserSchema.plugin(passportLocalMongoose); //also auto salt and hash password
 
 module.exports = mongoose.model("User", UserSchema);

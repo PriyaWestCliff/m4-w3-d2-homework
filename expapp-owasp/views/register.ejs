@@ -9,11 +9,20 @@
     <p style="color:red;"><%= errors.general %></p>
   <% } %>
 
-  <form action="/register" method="POST">
+  <form action="/register" method="POST" novalidate>
 
     <!-- Username -->
     <label for="username">Username</label>
-    <input type="text" id="username" name="username" required minlength="3">
+    <input
+      type="text"
+      id="username"
+      name="username"
+      required
+      minlength="3"
+      value="<%= (formData && formData.username) ? formData.username : '' %>"
+      oninvalid="this.setCustomValidity('Username must be at least 3 characters')"
+      oninput="this.setCustomValidity('')"
+    >
     <% if (errors && errors.username) { %>
       <p style="color:red;"><%= errors.username %></p>
     <% } %>
@@ -28,6 +37,8 @@
       minlength="8"
       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
       title="Password must be at least 8 characters and include uppercase, lowercase, and a number"
+      oninvalid="this.setCustomValidity('Password must be at least 8 characters and include uppercase, lowercase, and a number')"
+      oninput="this.setCustomValidity('')"
     >
     <% if (errors && errors.password) { %>
       <p style="color:red;"><%= errors.password %></p>
@@ -35,11 +46,24 @@
 
     <!-- Email -->
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      required
+      value="<%= (formData && formData.email) ? formData.email : '' %>"
+      oninvalid="this.setCustomValidity('Please enter a valid email')"
+      oninput="this.setCustomValidity('')"
+    >
 
     <!-- Phone -->
     <label for="phone">Phone</label>
-    <input type="text" name="phone" id="phone">
+    <input
+      type="text"
+      name="phone"
+      id="phone"
+      value="<%= (formData && formData.phone) ? formData.phone : '' %>"
+    >
 
     <button class="btn btn-success">Submit</button>
   </form>

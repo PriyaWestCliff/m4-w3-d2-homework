@@ -1,0 +1,46 @@
+<%- include('header'); %>
+<%- include('nav'); %>
+
+<main>
+  <h3>Sign Up</h3>
+
+  <!-- General error -->
+  <% if (errors && errors.general) { %>
+    <p style="color:red;"><%= errors.general %></p>
+  <% } %>
+
+  <form action="/register" method="POST">
+
+    <!-- Username -->
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required minlength="3">
+    <% if (errors && errors.username) { %>
+      <p style="color:red;"><%= errors.username %></p>
+    <% } %>
+
+    <!-- Password -->
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      required
+      minlength="8"
+      pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
+      title="Password must be at least 8 characters and include uppercase, lowercase, and a number"
+    >
+    <% if (errors && errors.password) { %>
+      <p style="color:red;"><%= errors.password %></p>
+    <% } %>
+
+    <!-- Email -->
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
+
+    <!-- Phone -->
+    <label for="phone">Phone</label>
+    <input type="text" name="phone" id="phone">
+
+    <button class="btn btn-success">Submit</button>
+  </form>
+</main>
